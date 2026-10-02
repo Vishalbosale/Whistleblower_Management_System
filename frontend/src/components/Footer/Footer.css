@@ -1,0 +1,188 @@
+/* ================================
+   FOOTER
+================================ */
+
+.main-footer {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    margin-top: auto;
+
+    background: var(--grad-deep);
+    color: rgba(255, 255, 255, 0.68);
+    font-size: var(--fs-md);
+}
+
+/* Thin brand accent along the top edge */
+.main-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--brand-600),
+        var(--accent-500),
+        var(--brand-600)
+    );
+}
+
+/* ================================
+   TOP — BRAND + LINK COLUMNS
+================================ */
+
+/* Full-bleed, matching the header — the brand column starts a gutter from
+   the viewport edge so the footer logo lines up under the header logo. */
+.footer-top {
+    width: 100%;
+    padding: var(--sp-8) var(--gutter) var(--sp-7);
+
+    /* Brand spans two tracks, then one track per link column, so the
+       brand text and every column heading sit on the same baseline grid. */
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--sp-6) var(--sp-8);
+    align-items: start;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    text-align: left;
+}
+
+.footer-mark {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+
+    border-radius: var(--r-md);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: var(--accent-300);
+}
+
+.footer-brand strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    color: var(--n-0);
+    letter-spacing: -0.015em;
+}
+
+.footer-brand p {
+    margin-top: var(--sp-2);
+    max-width: 42ch;
+    font-size: var(--fs-sm);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* ================================
+   LINK COLUMNS
+================================ */
+
+/* The nav is a semantic wrapper only — its columns join the parent grid. */
+.footer-nav {
+    display: contents;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-2);
+    text-align: left;
+}
+
+.footer-col h3 {
+    margin-bottom: var(--sp-1);
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.42);
+}
+
+.footer-col a {
+    position: relative;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: var(--fs-md);
+    transition:
+        color var(--dur) var(--ease),
+        transform var(--dur) var(--ease-out);
+}
+
+.footer-col a:hover {
+    color: var(--n-0);
+    transform: translateX(3px);
+}
+
+/* ================================
+   BOTTOM BAR
+================================ */
+
+.footer-bottom {
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    font-size: var(--fs-sm);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-bottom-inner {
+    width: 100%;
+    padding: var(--sp-4) var(--gutter);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+}
+
+.footer-secure {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-secure svg {
+    color: var(--accent-300);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 860px) {
+    .footer-top {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: var(--sp-7);
+        padding: var(--sp-7) var(--sp-5) var(--sp-6);
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-top {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom-inner {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: var(--sp-4);
+    }
+}

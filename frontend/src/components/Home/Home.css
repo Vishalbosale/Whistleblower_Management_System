@@ -1,0 +1,713 @@
+/* =========================================================
+   HOME PAGE
+   Axis palette: white and light-neutral surfaces carry the
+   page, burgundy anchors the brand, rose is the accent.
+========================================================= */
+
+.home-page {
+  width: 100%;
+  padding-bottom: var(--sp-10);
+}
+
+/* =========================================================
+   HERO — light and corporate
+========================================================= */
+
+.home-hero {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(180deg, var(--brand-50) 0%, #ffffff 78%);
+  color: var(--text);
+
+  border-bottom: 1px solid var(--border);
+
+  padding: var(--sp-10) 0;
+  margin-bottom: var(--sp-8);
+}
+
+/* Soft burgundy blooms, kept faint so the hero stays light */
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      680px 380px at 6% -10%,
+      rgba(151, 20, 77, 0.1),
+      transparent 62%
+    ),
+    radial-gradient(
+      520px 340px at 98% 8%,
+      rgba(235, 17, 101, 0.07),
+      transparent 60%
+    );
+}
+
+.home-hero-inner {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: var(--sp-9);
+}
+
+.hero-copy {
+  text-align: left;
+}
+
+.hero-eyebrow {
+  margin-bottom: var(--sp-5);
+}
+
+.hero-copy h1 {
+  margin: 0 0 var(--sp-4);
+  font-size: var(--fs-5xl);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.032em;
+  color: var(--text-strong);
+}
+
+/* Second line carries the brand colour */
+.hero-accent {
+  display: block;
+  color: var(--brand-700);
+}
+
+.hero-lead {
+  max-width: 56ch;
+  font-size: var(--fs-lg);
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+/* ---------- Hero buttons ---------- */
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-7);
+}
+
+.hero-btn {
+  position: relative;
+  overflow: hidden;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  padding: 14px 24px;
+  border-radius: var(--r-pill);
+
+  font-size: var(--fs-md);
+  font-weight: 700;
+  text-decoration: none;
+
+  transition:
+    transform var(--dur) var(--ease-spring),
+    box-shadow var(--dur) var(--ease),
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.hero-btn-primary {
+  background: var(--brand-700);
+  color: var(--text-invert);
+  box-shadow: var(--sh-brand);
+}
+
+.hero-btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--grad-sheen);
+  transform: translateX(-120%);
+  transition: transform 700ms var(--ease-out);
+}
+
+.hero-btn-primary:hover {
+  background: var(--brand-800);
+  color: var(--text-invert);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -10px rgba(151, 20, 77, 0.55);
+}
+
+.hero-btn-primary:hover::before {
+  transform: translateX(120%);
+}
+
+.hero-btn-arrow {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.hero-btn-primary:hover .hero-btn-arrow {
+  transform: translateX(4px);
+}
+
+.hero-btn-ghost {
+  background: var(--surface);
+  border: 1px solid var(--brand-200);
+  color: var(--brand-700);
+  box-shadow: var(--sh-xs);
+}
+
+.hero-btn-ghost:hover {
+  background: var(--brand-50);
+  border-color: var(--brand-300);
+  color: var(--brand-800);
+  transform: translateY(-2px);
+}
+
+/* ---------- Assurance strip ---------- */
+
+.hero-assurances {
+  list-style: none;
+  margin: var(--sp-7) 0 0;
+  padding: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-6);
+}
+
+.hero-assurances li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.hero-assurances svg {
+  color: var(--brand-600);
+}
+
+/* =========================================================
+   HERO PANEL — sample tracked case
+========================================================= */
+
+.hero-panel {
+  position: relative;
+  animation: wms-scale-in var(--dur-slow) var(--ease-out) 120ms both;
+}
+
+.hero-panel-glow {
+  position: absolute;
+  inset: -12%;
+  background: radial-gradient(
+    closest-side,
+    rgba(151, 20, 77, 0.14),
+    transparent 72%
+  );
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.hero-panel-card {
+  position: relative;
+
+  padding: var(--sp-6);
+  border-radius: var(--r-2xl);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--sh-lg);
+
+  animation: wms-float 7s var(--ease) infinite;
+}
+
+.hero-panel-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.hero-panel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 0 rgba(16, 121, 90, 0.5);
+  animation: wms-pulse-ring 2.4s var(--ease) infinite;
+}
+
+.hero-panel-id {
+  margin: var(--sp-2) 0 var(--sp-6);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--brand-700);
+}
+
+.hero-panel-track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.hero-track-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: start;
+  gap: var(--sp-3);
+  padding: var(--sp-2) 0;
+}
+
+/* Connector line between nodes */
+.hero-track-step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 28px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--border);
+}
+
+.hero-track-node {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-invert);
+}
+
+.hero-track-step.is-done .hero-track-node {
+  background: var(--brand-700);
+  border-color: var(--brand-700);
+}
+
+.hero-track-step.is-active .hero-track-node {
+  background: var(--success);
+  border-color: var(--success-bd);
+  animation: wms-pulse-ring 2.4s var(--ease) infinite;
+}
+
+.hero-track-step strong {
+  display: block;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.hero-track-step small {
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+}
+
+.hero-track-step:not(.is-done):not(.is-active) strong {
+  color: var(--text-faint);
+}
+
+/* =========================================================
+   INTRO NOTE
+========================================================= */
+
+.home-note {
+  width: 100%;
+  max-width: var(--rail);
+  margin: 0 auto var(--sp-8);
+  padding: var(--sp-5) var(--sp-6);
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--brand-500);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+}
+
+.home-note-icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--r-sm);
+  background: var(--brand-50);
+  color: var(--brand-600);
+}
+
+.home-note-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+
+  font-size: var(--fs-md);
+  line-height: 1.7;
+  color: var(--text);
+  text-align: left;
+}
+
+/* =========================================================
+   INFORMATION CARDS
+========================================================= */
+
+.info-section {
+  width: 100%;
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-5);
+
+  /* Cards size to their own content — the three sections differ a lot in
+     length, and stretching leaves the short ones mostly empty. */
+  align-items: start;
+}
+
+.info-card {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-sm);
+
+  text-align: left;
+
+  transition:
+    transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+/* Brand rail that fills in on hover */
+.info-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+
+  background: var(--grad-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--brand-200);
+  box-shadow: var(--sh-lg);
+}
+
+.info-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* ---------- Card header ---------- */
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+
+  padding: var(--sp-5) var(--sp-5) var(--sp-4);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.card-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--r-md);
+  background: var(--grad-brand-soft);
+  border: 1px solid var(--brand-100);
+  color: var(--brand-700);
+
+  transition: transform var(--dur) var(--ease-spring);
+}
+
+.info-card:hover .card-icon {
+  transform: scale(1.08) rotate(-5deg);
+}
+
+.card-heading h2 {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--text-strong);
+  letter-spacing: -0.015em;
+}
+
+.card-kicker {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--text-faint);
+}
+
+/* ---------- Card content ---------- */
+
+.card-content {
+  flex: 1;
+  padding: var(--sp-5);
+
+  display: flex;
+  flex-direction: column;
+
+  font-size: var(--fs-md);
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.card-content p {
+  margin: 0 0 var(--sp-4);
+}
+
+.card-content .sub-heading {
+  margin-bottom: var(--sp-2);
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+/* ---------- Lists ---------- */
+
+.card-content ol {
+  margin: 0;
+  padding: 0;
+  counter-reset: wms-ol;
+  list-style: none;
+}
+
+.card-content ol li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: var(--sp-2);
+  counter-increment: wms-ol;
+}
+
+.card-content ol li::before {
+  content: counter(wms-ol);
+  position: absolute;
+  left: 0;
+  top: 0.3em;
+
+  width: 19px;
+  height: 19px;
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+  background: var(--brand-50);
+  border: 1px solid var(--brand-200);
+  color: var(--brand-700);
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.check-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.check-list li {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  align-items: start;
+  gap: var(--sp-3);
+}
+
+.check-list svg {
+  margin-top: 5px;
+  padding: 3px;
+  box-sizing: content-box;
+
+  border-radius: 50%;
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+/* ---------- Final note ---------- */
+
+.final-note {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  margin-top: auto;
+  padding: var(--sp-3) var(--sp-4);
+
+  background: var(--grad-brand-soft);
+  border: 1px solid var(--brand-100);
+  border-radius: var(--r-md);
+
+  color: var(--brand-700) !important;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.final-note svg {
+  flex-shrink: 0;
+}
+
+/* ---------- Card CTA ---------- */
+
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  margin-top: var(--sp-4);
+
+  color: var(--brand-700);
+  font-size: var(--fs-md);
+  font-weight: 700;
+}
+
+.card-cta svg {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.card-cta:hover svg {
+  transform: translateX(4px);
+}
+
+/* ---------- Policy link ---------- */
+
+.policy-link {
+  color: var(--brand-700);
+  font-weight: 600;
+  background-image: linear-gradient(var(--brand-300), var(--brand-300));
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--dur) var(--ease);
+}
+
+.policy-link:hover {
+  color: var(--brand-800);
+  background-size: 100% 2px;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1040px) {
+  .home-hero {
+    padding: var(--sp-9) 0;
+  }
+
+  .home-hero-inner {
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+  }
+
+  .hero-copy h1 {
+    font-size: var(--fs-4xl);
+  }
+
+  .hero-panel-card {
+    animation: none;
+  }
+
+  /* .home-note keeps the shared rail at every width */
+
+  .info-section {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .info-card:last-child {
+    grid-column: span 2;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .home-hero {
+    padding: var(--sp-8) 0 var(--sp-9);
+  }
+
+  .hero-copy h1 {
+    font-size: var(--fs-3xl);
+  }
+
+  .hero-lead {
+    font-size: var(--fs-md);
+  }
+
+  .hero-btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .hero-assurances {
+    gap: var(--sp-2) var(--sp-4);
+  }
+
+  .home-note {
+    padding: var(--sp-4);
+  }
+
+  .info-section {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+
+  .info-card:last-child {
+    grid-column: auto;
+  }
+
+  .card-header {
+    padding: var(--sp-4);
+  }
+
+  .card-content {
+    padding: var(--sp-4);
+    font-size: var(--fs-sm);
+  }
+}

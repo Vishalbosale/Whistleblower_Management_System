@@ -1,0 +1,372 @@
+/* =========================================================
+   MAIN HEADER
+   Axis burgundy, flat and corporate — brand on the left,
+   navigation and the primary action on the right.
+========================================================= */
+
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+
+  width: 100%;
+
+  background: var(--brand-700);
+  color: var(--text-invert);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  transition: box-shadow var(--dur) var(--ease);
+}
+
+.main-header.is-scrolled {
+  box-shadow: 0 4px 18px -6px rgba(61, 8, 32, 0.45);
+}
+
+/* Full-bleed rather than on the --shell-max rail: the brand sits a gutter
+   from the viewport edge and the nav a gutter from the other, so the bar
+   spans the screen at any width. On wide monitors the centred rail left
+   the logo stranded a long way inside the edge. */
+.header-inner {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  min-height: var(--header-h);
+  padding-inline: var(--gutter);
+
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+
+  transition: min-height var(--dur) var(--ease);
+}
+
+.main-header.is-scrolled .header-inner {
+  min-height: 58px;
+}
+
+/* =========================================================
+   BRAND — LEFT
+========================================================= */
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+
+  /* Sits hard left; the nav is pushed right by margin-left:auto */
+  margin-right: auto;
+  flex-shrink: 0;
+
+  color: var(--text-invert);
+  text-decoration: none;
+
+  transition: opacity var(--dur) var(--ease);
+}
+
+.header-logo:hover {
+  color: var(--text-invert);
+  opacity: 0.88;
+}
+
+/* Official Axis Finance wordmark (white lockup on the burgundy header) */
+.logo-img {
+  height: 34px;
+  width: auto;
+  /* The artwork is ~4.87:1, so height alone drives the size */
+  max-width: none;
+  object-fit: contain;
+  transition: height var(--dur) var(--ease);
+}
+
+.main-header.is-scrolled .logo-img {
+  height: 29px;
+}
+
+/* Fallback mark when no artwork is present */
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: var(--text-invert);
+
+  transition: background-color var(--dur) var(--ease);
+}
+
+.header-logo:hover .logo-mark {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.logo-copy {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+
+/* Hairline separating the wordmark from the application name */
+.logo-divider {
+  width: 1px;
+  height: 26px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.logo-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: rgba(255, 255, 255, 0.94);
+  white-space: nowrap;
+}
+
+.logo-subtitle {
+  margin-top: 2px;
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+/* =========================================================
+   NAVIGATION — RIGHT
+========================================================= */
+
+.header-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.nav-link {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  padding: 9px 14px;
+  border-radius: var(--r-sm);
+
+  color: rgba(255, 255, 255, 0.86);
+  text-decoration: none;
+
+  font-size: var(--fs-md);
+  font-weight: 500;
+  white-space: nowrap;
+
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-invert);
+}
+
+/* Underline that grows from the centre */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  height: 2px;
+  width: 0;
+
+  background: var(--accent-300);
+  border-radius: var(--r-pill);
+
+  transform: translateX(-50%);
+  transition: width var(--dur) var(--ease-out);
+}
+
+.nav-link:hover::after {
+  width: 30%;
+}
+
+.nav-link.active {
+  color: var(--text-invert);
+  background: rgba(255, 255, 255, 0.14);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  width: 52%;
+}
+
+/* =========================================================
+   PRIMARY CTA
+========================================================= */
+
+.reporting-btn {
+  position: relative;
+  overflow: hidden;
+
+  margin-left: var(--sp-3);
+  padding: 10px 18px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  background: var(--n-0);
+  color: var(--brand-700);
+
+  border-radius: var(--r-pill);
+
+  font-size: var(--fs-md);
+  font-weight: 700;
+  white-space: nowrap;
+
+  box-shadow: 0 4px 12px -4px rgba(61, 8, 32, 0.5);
+
+  transition:
+    transform var(--dur) var(--ease-spring),
+    box-shadow var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+/* Sheen sweep on hover */
+.reporting-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--grad-sheen);
+  transform: translateX(-120%);
+  transition: transform 620ms var(--ease-out);
+}
+
+.reporting-btn:hover {
+  color: var(--brand-800);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -6px rgba(61, 8, 32, 0.55);
+}
+
+.reporting-btn:hover::before {
+  transform: translateX(120%);
+}
+
+.reporting-btn:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   MOBILE MENU BUTTON
+========================================================= */
+
+.header-menu-btn {
+  display: none;
+
+  width: 40px;
+  height: 40px;
+  place-items: center;
+
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--r-sm);
+  color: var(--text-invert);
+
+  transition: background-color var(--dur) var(--ease);
+}
+
+.header-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1080px) {
+  /* The gutter token already narrows here — no override, or the header
+     would drift off the rail the rest of the page sits on. */
+  .nav-link {
+    padding: 8px 10px;
+    font-size: var(--fs-sm);
+  }
+
+  .reporting-btn {
+    margin-left: var(--sp-2);
+    padding: 9px 14px;
+    font-size: var(--fs-sm);
+  }
+
+  .logo-title {
+    font-size: var(--fs-base);
+  }
+}
+
+/* =========================================================
+   MOBILE — slide-down drawer
+========================================================= */
+
+@media (max-width: 860px) {
+  .header-menu-btn {
+    display: grid;
+  }
+
+  .header-nav {
+    /* Collapsed by default; .is-open switches it back to flex */
+    display: none;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    margin-left: 0;
+    padding: var(--sp-3);
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-1);
+
+    background: var(--brand-800);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: var(--sh-lg);
+  }
+
+  .header-nav.is-open {
+    display: flex;
+    animation: wms-fade-up var(--dur) var(--ease-out) both;
+  }
+
+  .nav-link {
+    padding: 12px 14px;
+    font-size: var(--fs-md);
+    border-radius: var(--r-sm);
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  .reporting-btn {
+    margin-left: 0;
+    margin-top: var(--sp-2);
+    justify-content: center;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Tight widths: the wordmark alone carries the brand, so the
+     application name and its divider step aside for the menu button. */
+  .logo-copy {
+    display: none;
+  }
+
+  .logo-img {
+    height: 28px;
+  }
+}

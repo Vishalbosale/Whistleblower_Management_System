@@ -1,0 +1,93 @@
+/* =========================================================
+   GLOBAL ENTRY
+   Tokens + reset live in styles/tokens.css. This file only
+   holds app-wide primitives shared by both portals.
+========================================================= */
+
+@import "./styles/tokens.css";
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+}
+
+/* ---------------------------------------------------------
+   SHARED PRIMITIVES
+--------------------------------------------------------- */
+
+/* Section eyebrow — small uppercase label above a heading */
+.wms-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 5px 12px 5px 8px;
+  border-radius: var(--r-pill);
+  background: var(--brand-50);
+  border: 1px solid var(--brand-100);
+  color: var(--brand-700);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.wms-eyebrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---------------------------------------------------------
+   THE RAIL
+   Two ways to sit on the shared content rail:
+
+   .page-shell — an outer wrapper whose *children* land on the
+   rail (its own padding forms the gutter).
+
+   .page-rail  — a block that is itself the visible thing (a
+   card, a heading row); its border lands on the rail.
+
+   Both put painted edges at the same x on every page.
+--------------------------------------------------------- */
+
+.page-shell {
+  width: 100%;
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.page-rail {
+  width: 100%;
+  max-width: var(--rail);
+  margin-inline: auto;
+}
+
+.wms-container {
+  width: 100%;
+  max-width: var(--shell-max);
+  margin-inline: auto;
+}
+
+/* Decorative dot grid used behind hero areas */
+.wms-dotgrid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.16) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+}
+
+/* Inline icon sizing helper */
+.wms-ico {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

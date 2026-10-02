@@ -1,0 +1,424 @@
+/* =========================================================
+   WMS DESIGN SYSTEM — TOKENS
+   Single source of truth for colour, type, space, elevation
+   and motion across the public portal and the staff portal.
+========================================================= */
+
+:root {
+  /* ---------- Brand (Axis burgundy)
+     Anchored on the Axis signature burgundy #97144D, with the official
+     maroon #800000 family below it and Ruby #EB1165 as the secondary. --- */
+  --brand-50:  #fdf2f7;
+  --brand-100: #fbe4ee;
+  --brand-200: #f6c4da;
+  --brand-300: #ee97bd;
+  --brand-400: #e05e97;
+  --brand-500: #ce2f74;
+  --brand-600: #ae275f;
+  --brand-700: #97144d;
+  --brand-800: #7a1040;
+  --brand-900: #5c0c30;
+  --brand-950: #3d0820;
+
+  /* Axis secondary — use sparingly, for accents and highlights */
+  --ruby: #eb1165;
+
+  /* ---------- Neutrals ---------- */
+  --n-0:   #ffffff;
+  --n-25:  #fbfbfd;
+  --n-50:  #f7f8fa;
+  --n-100: #eff1f5;
+  --n-200: #e4e7ee;
+  --n-300: #cdd2dd;
+  --n-400: #9aa2b2;
+  --n-500: #6f7787;
+  --n-600: #545c6c;
+  --n-700: #3d4351;
+  --n-800: #272c37;
+  --n-900: #171a22;
+
+  /* ---------- Accent (rose → ruby, the Axis secondary)
+     Light rose is what reads legibly on top of burgundy; the ruby is
+     reserved for hairlines and small highlights. ---------- */
+  --accent-100: #fde8f1;
+  --accent-300: #f9b4d0;
+  --accent-500: var(--ruby);
+  --accent-700: #ae275f;
+
+  /* ---------- Semantic ---------- */
+  --success:      #10795a;
+  --success-bg:   #e6f6f0;
+  --success-bd:   #b9e3d5;
+  --warning:      #a86412;
+  --warning-bg:   #fdf3e3;
+  --warning-bd:   #f2ddb8;
+  --danger:       #c0362c;
+  --danger-bg:    #fdecea;
+  --danger-bd:    #f4cbc6;
+  --info:         #2360cc;
+  --info-bg:      #e9f0fd;
+  --info-bd:      #c4d8f8;
+
+  /* ---------- Roles ---------- */
+  --primary:        var(--brand-700);
+  --primary-hover:  var(--brand-800);
+  --primary-soft:   var(--brand-50);
+  --ring:           rgba(151, 20, 77, 0.16);
+
+  --canvas:         #f7f7f9;
+  --surface:        var(--n-0);
+  --surface-alt:    var(--n-50);
+  --surface-sunken: var(--n-100);
+
+  --text:        var(--n-700);
+  --text-strong: var(--n-900);
+  --text-muted:  var(--n-500);
+  --text-faint:  var(--n-400);
+  --text-invert: var(--n-0);
+
+  --border:        var(--n-200);
+  --border-strong: var(--n-300);
+  --border-soft:   var(--n-100);
+
+  /* ---------- Gradients ---------- */
+  --grad-brand: linear-gradient(135deg, #ae275f 0%, #97144d 60%, #7a1040 100%);
+  --grad-brand-soft: linear-gradient(135deg, #fdf2f7 0%, #fbe4ee 100%);
+  --grad-deep: linear-gradient(150deg, #97144d 0%, #7a1040 55%, #4d0a28 100%);
+  /* Ink-plum: a deep neutral warmed toward the brand. Reads as a distinct
+     surface next to the flat burgundy header and footer while still
+     belonging to the same family. */
+  --grad-ink: linear-gradient(155deg, #2e1c28 0%, #211320 55%, #160c15 100%);
+  --grad-sheen: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 80%
+  );
+
+  /* ---------- Typography ---------- */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas,
+    "Liberation Mono", monospace;
+
+  --fs-2xs: 0.6875rem; /* 11 */
+  --fs-xs:  0.75rem;   /* 12 */
+  --fs-sm:  0.8125rem; /* 13 */
+  --fs-md:  0.875rem;  /* 14 */
+  --fs-base:0.9375rem; /* 15 */
+  --fs-lg:  1.0625rem; /* 17 */
+  --fs-xl:  1.25rem;   /* 20 */
+  --fs-2xl: 1.5rem;    /* 24 */
+  --fs-3xl: 1.875rem;  /* 30 */
+  --fs-4xl: 2.375rem;  /* 38 */
+  --fs-5xl: 3rem;      /* 48 */
+
+  /* ---------- Spacing ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-7: 32px;
+  --sp-8: 40px;
+  --sp-9: 56px;
+  --sp-10: 72px;
+
+  /* ---------- Radii ---------- */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 18px;
+  --r-2xl: 24px;
+  --r-pill: 999px;
+
+  /* ---------- Elevation ---------- */
+  --sh-xs: 0 1px 2px rgba(23, 26, 34, 0.06);
+  --sh-sm: 0 1px 2px rgba(23, 26, 34, 0.05), 0 2px 6px rgba(23, 26, 34, 0.05);
+  --sh-md: 0 2px 4px rgba(23, 26, 34, 0.04), 0 8px 18px -6px rgba(23, 26, 34, 0.12);
+  --sh-lg: 0 4px 8px rgba(23, 26, 34, 0.04), 0 18px 36px -10px rgba(23, 26, 34, 0.16);
+  --sh-xl: 0 8px 16px rgba(23, 26, 34, 0.05), 0 32px 64px -16px rgba(23, 26, 34, 0.22);
+  --sh-brand: 0 8px 22px -8px rgba(151, 20, 77, 0.45);
+  --sh-inset: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+
+  /* ---------- Motion ---------- */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-fast: 130ms;
+  --dur: 220ms;
+  --dur-slow: 420ms;
+
+  /* ---------- Layout ----------
+     Every page block sits on one rail: an outer box of --shell-max with
+     --gutter of padding, so painted edges (card borders, headings) line
+     up with the header brand and the footer columns on every page. */
+  --shell-max: 1240px;
+  --gutter: 24px;
+  /* Width of a block that IS the visible card, so its border lands on the rail */
+  --shell-inner: calc(var(--shell-max) - 2 * var(--gutter));
+  /* Same, but still leaves a gutter once the viewport is narrower than the
+     shell — otherwise such blocks run to the screen edge while padded
+     wrappers stay inset, and the two drift apart. */
+  --rail: min(var(--shell-inner), calc(100% - 2 * var(--gutter)));
+
+  --header-h: 68px;
+  --sidebar-w: 248px;
+
+  --z-header: 900;
+  --z-overlay: 1000;
+}
+
+/* The gutter narrows on smaller screens; --shell-inner follows it. */
+@media (max-width: 1080px) {
+  :root {
+    --gutter: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+/* =========================================================
+   RESET / BASE
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--canvas);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.018em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--dur) var(--ease);
+}
+
+a:hover {
+  color: var(--brand-600);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: var(--brand-200);
+  color: var(--brand-900);
+}
+
+/* Focus — visible, branded, never clipped */
+:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
+}
+
+/* Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--n-300) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--n-300);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: var(--r-pill);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--n-400);
+  background-clip: content-box;
+}
+
+/* =========================================================
+   ANIMATION LIBRARY
+========================================================= */
+
+@keyframes wms-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes wms-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes wms-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes wms-shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes wms-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wms-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(151, 20, 77, 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(151, 20, 77, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(151, 20, 77, 0);
+  }
+}
+
+@keyframes wms-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.wms-enter {
+  animation: wms-fade-up var(--dur-slow) var(--ease-out) both;
+}
+
+.wms-stagger > * {
+  animation: wms-fade-up var(--dur-slow) var(--ease-out) both;
+}
+.wms-stagger > *:nth-child(1) { animation-delay: 40ms; }
+.wms-stagger > *:nth-child(2) { animation-delay: 100ms; }
+.wms-stagger > *:nth-child(3) { animation-delay: 160ms; }
+.wms-stagger > *:nth-child(4) { animation-delay: 220ms; }
+.wms-stagger > *:nth-child(5) { animation-delay: 280ms; }
+.wms-stagger > *:nth-child(6) { animation-delay: 340ms; }
+
+/* Spinner used inside buttons */
+.wms-spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: wms-spin 0.65s linear infinite;
+  display: inline-block;
+  vertical-align: -2px;
+  opacity: 0.9;
+}
+
+/* Skeleton shimmer */
+.wms-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--n-100) 25%,
+    var(--n-200) 37%,
+    var(--n-100) 63%
+  );
+  background-size: 200% 100%;
+  animation: wms-shimmer 1.4s ease-in-out infinite;
+  border-radius: var(--r-xs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

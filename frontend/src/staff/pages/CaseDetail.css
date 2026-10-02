@@ -1,0 +1,176 @@
+/* =========================================================
+   CASE DETAIL — pinned summary + tabbed sections
+========================================================= */
+
+/* ---------- Pinned summary bar ---------- */
+
+.cd-summary-bar {
+    position: sticky;
+    top: 62px;
+    z-index: 40;
+
+    margin: 0 0 var(--sp-5);
+    padding: var(--sp-4) var(--sp-5);
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    box-shadow: var(--sh-sm);
+}
+
+.cd-summary-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+}
+
+.cd-summary-id {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+}
+
+.cd-summary-id h1 {
+    margin: 0;
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    color: var(--text-strong);
+    letter-spacing: -0.02em;
+}
+
+.cd-summary-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+}
+
+.cd-summary-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-6);
+
+    margin-top: var(--sp-3);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--border-soft);
+}
+
+.cd-fact {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cd-fact-label {
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+
+.cd-fact-value {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text-strong);
+}
+
+/* ---------- Tabs ---------- */
+
+.cd-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+
+    margin-bottom: var(--sp-5);
+    padding-bottom: 0;
+    border-bottom: 1px solid var(--border);
+
+    overflow-x: auto;
+}
+
+.cd-tab {
+    flex-shrink: 0;
+    position: relative;
+
+    padding: 10px var(--sp-4) 12px;
+    border: 0;
+    background: transparent;
+
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+
+    transition: color var(--dur) var(--ease);
+}
+
+.cd-tab:hover {
+    color: var(--text-strong);
+}
+
+.cd-tab.is-active {
+    color: var(--brand-700);
+}
+
+.cd-tab.is-active::after {
+    content: "";
+    position: absolute;
+    left: var(--sp-2);
+    right: var(--sp-2);
+    bottom: -1px;
+    height: 2px;
+    background: var(--brand-600);
+    border-radius: var(--r-pill);
+}
+
+.cd-tab-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-left: 6px;
+    border-radius: 50%;
+    background: var(--danger);
+    vertical-align: middle;
+}
+
+/* ---------- Panel ---------- */
+
+.cd-panel {
+    animation: wms-fade-up var(--dur) var(--ease-out) both;
+}
+
+.cd-empty {
+    padding: var(--sp-6) 0;
+    text-align: center;
+    color: var(--text-faint);
+    font-size: var(--fs-sm);
+}
+
+/* ---------- Two-column label/value grid ---------- */
+/* Same visual language as .staff-kv (dt/dd, border-soft rules) but lays two
+   label/value pairs side by side — the sequential dt,dd,dt,dd... markup just
+   flows into 4 grid columns two cells at a time, no markup change needed. */
+
+.cd-kv2.staff-kv {
+    grid-template-columns: 150px minmax(0, 1fr) 150px minmax(0, 1fr);
+    column-gap: var(--sp-6);
+}
+
+@media (max-width: 780px) {
+    .cd-kv2.staff-kv {
+        grid-template-columns: 1fr;
+    }
+
+    .cd-kv2.staff-kv dt {
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .cd-summary-facts {
+        gap: var(--sp-4);
+    }
+}

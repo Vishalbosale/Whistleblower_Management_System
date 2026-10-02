@@ -1,0 +1,1437 @@
+/* =========================================================
+   STAFF PORTAL — SHARED COMPONENTS
+========================================================= */
+
+/* ---------------------------------------------------------
+   PAGE HEADER
+--------------------------------------------------------- */
+
+.staff-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+
+  margin-bottom: var(--sp-5);
+}
+
+.staff-page-header h1 {
+  position: relative;
+  padding-left: var(--sp-4);
+
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--text-strong);
+  letter-spacing: -0.024em;
+}
+
+/* Brand tick beside the page title */
+.staff-page-header h1::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 4px;
+  height: 0.82em;
+  border-radius: var(--r-pill);
+  background: var(--grad-brand);
+}
+
+/* ---------------------------------------------------------
+   CARD
+--------------------------------------------------------- */
+
+.staff-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-5);
+  margin-bottom: var(--sp-5);
+
+  box-shadow: var(--sh-xs);
+
+  transition:
+    box-shadow var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.staff-card:hover {
+  border-color: var(--brand-100);
+  box-shadow: var(--sh-sm);
+}
+
+/* A card being typed into reads as the active one */
+.staff-card:focus-within {
+  border-color: var(--brand-200);
+  box-shadow: var(--sh-md);
+}
+
+/* ---------------------------------------------------------
+   FILTER BAR
+--------------------------------------------------------- */
+
+.staff-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+
+  padding: var(--sp-4);
+  margin-bottom: var(--sp-4);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-xs);
+}
+
+.staff-filter-bar select,
+.staff-filter-bar input {
+  padding: 9px 12px;
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-sm);
+  color: var(--text-strong);
+
+  outline: none;
+
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.staff-filter-bar select {
+  appearance: none;
+  padding-right: 34px;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236f7787' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+  cursor: pointer;
+}
+
+.staff-filter-bar input[type="text"] {
+  min-width: 240px;
+  flex: 1;
+}
+
+.staff-filter-bar select:hover,
+.staff-filter-bar input:hover {
+  border-color: var(--n-400);
+}
+
+.staff-filter-bar select:focus,
+.staff-filter-bar input:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.staff-clear-filters {
+  padding: 9px 16px;
+
+  background: var(--surface);
+  color: var(--brand-700);
+  border: 1px solid var(--brand-200);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-sm);
+  font-weight: 600;
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    opacity var(--dur) var(--ease);
+}
+
+.staff-clear-filters:hover:not(:disabled) {
+  background: var(--brand-50);
+  border-color: var(--brand-300);
+}
+
+.staff-clear-filters:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.staff-active-filters {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  margin: 0 0 var(--sp-4);
+  padding: 6px 13px;
+
+  background: var(--brand-50);
+  border: 1px solid var(--brand-100);
+  border-radius: var(--r-pill);
+
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--brand-700);
+}
+
+/* ---------------------------------------------------------
+   BANNERS
+--------------------------------------------------------- */
+
+.staff-readonly-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  padding: 11px 15px;
+  margin-bottom: var(--sp-4);
+
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-bd);
+  border-left: 3px solid var(--warning);
+  border-radius: var(--r-sm);
+
+  color: var(--warning);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+/* Louder than .staff-readonly-banner — "a request for additional details is
+   sitting here waiting on you". Brand-colored (not warning/danger) since
+   this is routine workflow, not a problem, but sized and bordered to stand
+   out above everything else on the page. */
+.staff-attention-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+
+  padding: 13px 16px;
+  margin-bottom: var(--sp-4);
+
+  background: var(--brand-50);
+  border: 1px solid var(--brand-200);
+  border-left: 4px solid var(--brand-600);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-xs);
+
+  color: var(--brand-800);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+
+  animation: wms-fade-up var(--dur) var(--ease-out) both;
+}
+
+.staff-attention-banner > svg {
+  flex-shrink: 0;
+  color: var(--brand-600);
+}
+
+.staff-attention-banner > span {
+  flex: 1;
+}
+
+.staff-attention-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+
+  color: var(--brand-700);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.staff-attention-banner-link:hover {
+  text-decoration: underline;
+}
+
+.staff-error,
+.staff-success {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+
+  padding: 11px 15px;
+  margin-bottom: var(--sp-4);
+
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+
+  animation: wms-fade-up var(--dur) var(--ease-out) both;
+}
+
+.staff-error {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-bd);
+  border-left: 3px solid var(--danger);
+  color: var(--danger);
+}
+
+.staff-success {
+  background: var(--success-bg);
+  border: 1px solid var(--success-bd);
+  border-left: 3px solid var(--success);
+  color: var(--success);
+}
+
+/* ---------------------------------------------------------
+   REMARK FORM
+--------------------------------------------------------- */
+
+.staff-remark-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-top: var(--sp-3);
+}
+
+.staff-remark-form textarea {
+  padding: 11px 13px;
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-md);
+  font-family: inherit;
+  line-height: 1.6;
+  color: var(--text-strong);
+
+  outline: none;
+  resize: vertical;
+
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.staff-remark-form textarea:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* ---------------------------------------------------------
+   TABLE
+--------------------------------------------------------- */
+
+.staff-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--r-md);
+}
+
+.staff-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--fs-sm);
+}
+
+.staff-table th,
+.staff-table td {
+  text-align: left;
+  padding: 12px 14px;
+  white-space: nowrap;
+}
+
+.staff-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--border);
+
+  color: var(--text-muted);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.staff-table td {
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text);
+}
+
+.staff-table tbody tr {
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.staff-table tbody tr:hover td {
+  background: var(--brand-50);
+}
+
+.staff-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.staff-table-link {
+  color: var(--brand-700);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ---------- Controls sitting inside a table cell ---------- */
+
+.staff-table td select,
+.staff-table td input {
+  padding: 6px 10px;
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-xs);
+
+  font-size: var(--fs-xs);
+  font-family: inherit;
+  color: var(--text-strong);
+
+  outline: none;
+
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.staff-table td select {
+  appearance: none;
+  padding-right: 28px;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236f7787' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 13px;
+  cursor: pointer;
+}
+
+.staff-table td select:hover,
+.staff-table td input:hover {
+  border-color: var(--n-400);
+}
+
+.staff-table td select:focus,
+.staff-table td input:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* Row actions read as compact chips, not page-level buttons */
+.staff-table td .staff-btn {
+  padding: 6px 13px;
+  font-size: var(--fs-xs);
+  border-radius: var(--r-xs);
+}
+
+.staff-table td .staff-btn-primary {
+  box-shadow: none;
+}
+
+.staff-table tbody tr:hover .staff-table-link {
+  color: var(--brand-800);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------------------------------------------------------
+   BADGES
+--------------------------------------------------------- */
+
+.staff-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 4px 11px;
+  border-radius: var(--r-pill);
+
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* Status dot before the label */
+.staff-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.staff-badge-neutral {
+  background: var(--surface-sunken);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.staff-badge-info {
+  background: var(--info-bg);
+  border-color: var(--info-bd);
+  color: var(--info);
+}
+
+.staff-badge-warning {
+  background: var(--warning-bg);
+  border-color: var(--warning-bd);
+  color: var(--warning);
+}
+
+.staff-badge-success {
+  background: var(--success-bg);
+  border-color: var(--success-bd);
+  color: var(--success);
+}
+
+.staff-badge-danger {
+  background: var(--danger-bg);
+  border-color: var(--danger-bd);
+  color: var(--danger);
+}
+
+/* ---------------------------------------------------------
+   FORMS
+--------------------------------------------------------- */
+
+.staff-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--sp-4) var(--sp-5);
+}
+
+.staff-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.staff-form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.staff-form-group label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.staff-form-group input,
+.staff-form-group select,
+.staff-form-group textarea {
+  padding: 10px 13px;
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-md);
+  font-family: inherit;
+  color: var(--text-strong);
+
+  outline: none;
+
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.staff-form-group select {
+  appearance: none;
+  padding-right: 36px;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236f7787' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  background-size: 15px;
+  cursor: pointer;
+}
+
+.staff-form-group input:hover,
+.staff-form-group select:hover,
+.staff-form-group textarea:hover {
+  border-color: var(--n-400);
+}
+
+.staff-form-group input:focus,
+.staff-form-group select:focus,
+.staff-form-group textarea:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* ---------------------------------------------------------
+   BUTTONS
+--------------------------------------------------------- */
+
+.staff-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+
+  padding: 10px 19px;
+
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-md);
+  font-weight: 600;
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    transform var(--dur) var(--ease-spring),
+    box-shadow var(--dur) var(--ease);
+}
+
+.staff-btn:hover:not(:disabled) {
+  background: var(--surface-sunken);
+  border-color: var(--n-400);
+  color: var(--text-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--sh-xs);
+}
+
+.staff-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.staff-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.staff-btn-primary {
+  position: relative;
+  overflow: hidden;
+
+  background: var(--grad-brand);
+  color: var(--text-invert);
+  border-color: transparent;
+  box-shadow: var(--sh-brand);
+}
+
+.staff-btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--grad-sheen);
+  transform: translateX(-120%);
+  transition: transform 700ms var(--ease-out);
+}
+
+.staff-btn-primary:hover:not(:disabled) {
+  background: var(--grad-brand);
+  color: var(--text-invert);
+  border-color: transparent;
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 12px 24px -10px rgba(151, 20, 77, 0.6);
+}
+
+.staff-btn-primary:hover:not(:disabled)::before {
+  transform: translateX(120%);
+}
+
+.staff-btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.staff-btn-primary:disabled {
+  box-shadow: none;
+}
+
+.staff-btn-danger {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-color: var(--danger-bd);
+}
+
+.staff-btn-danger:hover:not(:disabled) {
+  background: var(--danger);
+  color: var(--n-0);
+  border-color: var(--danger);
+}
+
+.staff-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+
+  /* Standalone rows need their own bottom gap; without it they collide
+     with whatever card follows. Inside a card the card's padding covers it. */
+  margin-bottom: var(--sp-5);
+}
+
+.staff-card .staff-actions-row {
+  margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------
+   COUNT CHIP
+--------------------------------------------------------- */
+
+.staff-count-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  padding: 6px 14px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  box-shadow: var(--sh-xs);
+
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.staff-count-chip svg {
+  color: var(--brand-500);
+}
+
+/* ---------------------------------------------------------
+   SEARCH FIELD
+--------------------------------------------------------- */
+
+.staff-search {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  align-items: center;
+}
+
+.staff-search > svg {
+  position: absolute;
+  left: 12px;
+  color: var(--text-faint);
+  pointer-events: none;
+  transition: color var(--dur) var(--ease);
+}
+
+.staff-search input {
+  width: 100%;
+  padding: 9px 12px 9px 36px;
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-sm);
+  color: var(--text-strong);
+
+  outline: none;
+
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.staff-search input:hover {
+  border-color: var(--n-400);
+}
+
+.staff-search input:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.staff-search:focus-within > svg {
+  color: var(--brand-600);
+}
+
+/* ---------------------------------------------------------
+   LOADING SKELETON ROWS
+--------------------------------------------------------- */
+
+.staff-skeleton-row {
+  cursor: default !important;
+}
+
+.staff-skeleton-row:hover td {
+  background: transparent !important;
+}
+
+.staff-skeleton-bar {
+  display: block;
+  height: 11px;
+}
+
+/* ---------------------------------------------------------
+   EMPTY STATE
+--------------------------------------------------------- */
+
+.staff-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+
+  padding: var(--sp-9) var(--sp-5);
+  text-align: center;
+
+  color: var(--text-faint);
+  font-size: var(--fs-md);
+}
+
+.staff-empty-icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--sp-2);
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  color: var(--text-faint);
+}
+
+.staff-empty strong {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.staff-empty span {
+  font-size: var(--fs-sm);
+  color: var(--text-faint);
+}
+
+/* ---------------------------------------------------------
+   SECTION TITLE
+--------------------------------------------------------- */
+
+.staff-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+
+  margin: 0 0 var(--sp-4);
+
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Rule that trails the title */
+.staff-section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ---------------------------------------------------------
+   KEY / VALUE LIST
+--------------------------------------------------------- */
+
+.staff-kv {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 0;
+  font-size: var(--fs-md);
+  margin: 0;
+}
+
+.staff-kv dt {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border-soft);
+
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-faint);
+}
+
+.staff-kv dd {
+  margin: 0;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border-soft);
+
+  color: var(--text-strong);
+  word-break: break-word;
+}
+
+.staff-kv dt:last-of-type,
+.staff-kv dd:last-of-type {
+  border-bottom: none;
+}
+
+/* ---------------------------------------------------------
+   TIMELINE
+--------------------------------------------------------- */
+
+.staff-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--fs-md);
+}
+
+.staff-timeline li {
+  position: relative;
+  margin-left: 5px;
+  padding: 0 0 var(--sp-4) var(--sp-5);
+  border-left: 2px solid var(--brand-100);
+}
+
+.staff-timeline li:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.staff-timeline li::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 5px;
+
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  background: var(--surface);
+  border: 2px solid var(--brand-500);
+}
+
+.staff-timeline li:first-child::before {
+  background: var(--brand-600);
+  box-shadow: 0 0 0 3px var(--brand-100);
+}
+
+/* ---------------------------------------------------------
+   STATS ROW
+--------------------------------------------------------- */
+
+.staff-stats-row {
+  display: grid;
+  grid-template-columns: 180px 210px minmax(0, 1fr);
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-5);
+}
+
+/* No 360° View tile (non-Admin roles) — one less column to lay out. */
+.staff-stats-row-compact {
+  grid-template-columns: 200px minmax(0, 1fr);
+}
+
+.staff-stat-tile {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-1);
+
+  padding: var(--sp-5);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-xs);
+
+  transition:
+    transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease);
+}
+
+.staff-stat-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sh-md);
+}
+
+.staff-stat-tile-primary {
+  background: var(--grad-brand);
+  border-color: transparent;
+  box-shadow: var(--sh-brand);
+}
+
+/* Soft highlight in the corner of the primary tile */
+.staff-stat-tile-primary::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+}
+
+.staff-stat-tile-primary .staff-stat-value {
+  color: var(--n-0);
+}
+
+.staff-stat-tile-primary .staff-stat-label {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.staff-stat-value {
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--brand-700);
+  font-variant-numeric: tabular-nums;
+}
+
+.staff-stat-label {
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+/* ---------------------------------------------------------
+   BAR CHART
+--------------------------------------------------------- */
+
+.staff-stat-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+
+  padding: var(--sp-5);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-xs);
+}
+
+.staff-bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.staff-bar-row {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr) 36px;
+  align-items: center;
+  gap: var(--sp-3);
+  font-size: var(--fs-xs);
+}
+
+.staff-bar-label {
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.staff-bar-track {
+  height: 10px;
+  background: var(--surface-sunken);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+
+.staff-bar-fill {
+  height: 100%;
+  border-radius: var(--r-pill);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+
+.staff-bar-count {
+  color: var(--text-strong);
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------
+   PAGINATION
+--------------------------------------------------------- */
+
+.staff-pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-4);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.staff-pagination button {
+  padding: 7px 14px;
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.staff-pagination button:hover:not(:disabled) {
+  background: var(--brand-50);
+  border-color: var(--brand-200);
+  color: var(--brand-700);
+}
+
+.staff-pagination button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .staff-stats-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .staff-stat-chart {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 620px) {
+  .staff-page-header h1 {
+    font-size: var(--fs-xl);
+  }
+
+  .staff-stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .staff-stat-chart {
+    grid-column: auto;
+  }
+
+  .staff-filter-bar input[type="text"] {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .staff-kv {
+    grid-template-columns: 1fr;
+  }
+
+  .staff-kv dt {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .staff-bar-row {
+    grid-template-columns: 100px minmax(0, 1fr) 30px;
+  }
+}
+
+/* ---------------------------------------------------------
+   WORKFLOW  —  complaint-handling procedure screens
+--------------------------------------------------------- */
+
+/* Status + SLA pills that sit beside a page title. */
+.staff-header-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+/* Explains the rule behind an action — the 4-day acknowledgement window,
+   the 6-day response deadline — without competing with the form itself. */
+.staff-note {
+  margin: 0 0 var(--sp-3);
+
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.staff-muted {
+  display: block;
+  margin-top: 2px;
+
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+}
+
+.staff-subsection-title {
+  margin: var(--sp-5) 0 var(--sp-3);
+
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+/* An outstanding request for additional details from the whistle-blower. */
+.staff-workflow-pending {
+  padding: var(--sp-4);
+
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-bd);
+  border-left: 3px solid var(--warning);
+  border-radius: var(--r-md);
+}
+
+.staff-workflow-question {
+  margin: 0 0 var(--sp-3);
+
+  font-size: var(--fs-lg);
+  font-style: italic;
+  color: var(--text-strong);
+}
+
+/* The reply to a question, indented under it in timelines. */
+.staff-workflow-answer {
+  display: block;
+  margin-top: var(--sp-1);
+  padding-left: var(--sp-3);
+
+  border-left: 2px solid var(--border);
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+
+.staff-workflow-history {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border-soft);
+}
+
+/* Committee attendance picker. */
+.staff-checkbox-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+
+  padding: var(--sp-3);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+
+.staff-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  font-size: var(--fs-md);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.staff-checkbox input {
+  width: auto;
+  margin: 0;
+  accent-color: var(--brand-600);
+}
+
+/* Collapsible investigation-report versions. */
+.staff-report {
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.staff-report:last-of-type {
+  border-bottom: 0;
+}
+
+.staff-report > summary {
+  cursor: pointer;
+  padding: var(--sp-1) 0;
+  font-size: var(--fs-md);
+}
+
+.staff-report > summary::marker {
+  color: var(--brand-500);
+}
+
+.staff-report > summary .staff-muted {
+  display: inline;
+  margin-left: var(--sp-2);
+}
+
+.staff-report[open] > summary {
+  margin-bottom: var(--sp-3);
+}
+
+/* A link rendered inside a banner, where an <a> would need routing. */
+.staff-link-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+
+  font: inherit;
+  font-weight: 700;
+  color: var(--brand-600);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------
+   DOCUMENTS, ROLES AND TRANSFERS
+--------------------------------------------------------- */
+
+/* Attachments. Everything listed is something the viewer is entitled to
+   download — access is decided server side, per case or complaint. */
+.staff-doc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.staff-doc-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.staff-doc-list li:last-child {
+  border-bottom: 0;
+}
+
+.staff-doc-list li > svg {
+  color: var(--text-faint);
+}
+
+.staff-doc-name {
+  font-weight: 600;
+  color: var(--text-strong);
+  word-break: break-word;
+}
+
+/* The name column carries the meta line underneath it. */
+.staff-doc-list .staff-muted {
+  grid-column: 2;
+}
+
+.staff-doc-list li > .staff-btn {
+  grid-row: 1 / span 2;
+  grid-column: 3;
+}
+
+/* Files chosen but not yet uploaded. */
+.staff-file-preview {
+  margin: var(--sp-2) 0 0;
+  padding-left: var(--sp-5);
+
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+/* Removable role chips in the admin user table. */
+.staff-role-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+}
+
+.staff-role-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 2px 4px 2px 8px;
+
+  background: var(--brand-50);
+  border: 1px solid var(--brand-200);
+  border-radius: var(--r-pill);
+
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--brand-700);
+  white-space: nowrap;
+}
+
+.staff-role-chip button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 16px;
+  height: 16px;
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+
+  font-size: 13px;
+  line-height: 1;
+  color: var(--brand-600);
+  cursor: pointer;
+}
+
+.staff-role-chip button:hover:not(:disabled) {
+  background: var(--danger);
+  color: var(--text-invert);
+}
+
+.staff-role-chip button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Inline transfer controls in the Admin console table. */
+.staff-transfer-cell {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+
+  min-width: 320px;
+}
+
+.staff-transfer-cell select,
+.staff-transfer-cell input {
+  min-width: 140px;
+  flex: 1 1 140px;
+}
+
+/* Secondary line inside a table cell (username under a full name). */
+.staff-table .staff-muted {
+  display: block;
+  margin-top: 2px;
+}

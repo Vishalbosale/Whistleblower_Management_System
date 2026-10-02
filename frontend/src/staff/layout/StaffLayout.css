@@ -1,0 +1,574 @@
+/* =========================================================
+   STAFF SHELL
+========================================================= */
+
+.staff-shell {
+  display: flex;
+  min-height: 100svh;
+  background: var(--canvas);
+  color: var(--text);
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.staff-sidebar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+
+  width: var(--sidebar-w);
+  height: 100svh;
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--grad-deep);
+  color: rgba(255, 255, 255, 0.72);
+
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Faint brand bloom at the top of the rail */
+.staff-sidebar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    420px 260px at 20% 0%,
+    rgba(235, 17, 101, 0.28),
+    transparent 65%
+  );
+}
+
+/* ---------- Brand ---------- */
+
+.staff-brand {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+
+  padding: var(--sp-5) var(--sp-5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.staff-brand-mark {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--accent-300);
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.staff-brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.staff-brand-copy strong {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--n-0);
+}
+
+.staff-brand-copy small {
+  margin-top: 2px;
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ---------- Navigation ---------- */
+
+.staff-nav {
+  position: relative;
+  z-index: 1;
+
+  flex: 1;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  padding: var(--sp-4) var(--sp-3);
+}
+
+.staff-nav-label {
+  padding: var(--sp-3) var(--sp-3) var(--sp-1);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.34);
+}
+
+.staff-nav-link {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+
+  padding: 11px var(--sp-3);
+  border-radius: var(--r-sm);
+
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: var(--fs-md);
+  font-weight: 500;
+
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    transform var(--dur) var(--ease-out);
+}
+
+.staff-nav-link svg {
+  flex-shrink: 0;
+  opacity: 0.75;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.staff-nav-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--n-0);
+  transform: translateX(2px);
+}
+
+.staff-nav-link:hover svg {
+  opacity: 1;
+}
+
+.staff-nav-link.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--n-0);
+  font-weight: 600;
+}
+
+.staff-nav-link.active svg {
+  opacity: 1;
+  color: var(--accent-300);
+}
+
+/* Active marker on the left edge */
+.staff-nav-link.active::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 3px;
+  height: 22px;
+  border-radius: 0 var(--r-pill) var(--r-pill) 0;
+  background: var(--accent-300);
+}
+
+/* ---------- Sidebar footer ---------- */
+
+.staff-sidebar-foot {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  padding: var(--sp-4) var(--sp-5);
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* =========================================================
+   MAIN COLUMN
+========================================================= */
+
+.staff-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Top bar ---------- */
+
+.staff-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+
+  padding: var(--sp-3) var(--gutter);
+  min-height: 62px;
+
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px) saturate(150%);
+  border-bottom: 1px solid var(--border);
+}
+
+.staff-topbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.staff-notifications {
+  position: relative;
+}
+
+.staff-notification-btn {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.staff-notification-btn:hover,
+.staff-notification-btn[aria-expanded="true"] {
+  background: var(--surface-sunken);
+  border-color: var(--border);
+  color: var(--text-strong);
+}
+
+.staff-notification-btn.has-unread {
+  color: var(--brand-600);
+}
+
+.staff-notification-count {
+  position: absolute;
+  top: -3px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--surface);
+  border-radius: var(--r-pill);
+  background: var(--danger);
+  color: var(--text-invert);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.staff-notification-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 80;
+  width: min(360px, calc(100vw - 32px));
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-lg);
+}
+
+.staff-notification-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.staff-notification-heading strong {
+  color: var(--text-strong);
+  font-size: var(--fs-sm);
+}
+
+.staff-notification-heading span,
+.staff-notification-empty {
+  color: var(--text-faint);
+  font-size: var(--fs-xs);
+}
+
+.staff-notification-list {
+  max-height: 330px;
+  overflow-y: auto;
+}
+
+.staff-notification-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.staff-notification-item:last-child {
+  border-bottom: 0;
+}
+
+.staff-notification-item:hover {
+  background: var(--surface-sunken);
+}
+
+.staff-notification-item.is-unread {
+  background: var(--brand-50);
+}
+
+.staff-notification-item.is-unread:hover {
+  background: var(--brand-100);
+}
+
+.staff-notification-item-icon {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--brand-50);
+  color: var(--brand-600);
+}
+
+.staff-notification-item-copy {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.staff-notification-item-copy strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-strong);
+  font-size: var(--fs-sm);
+}
+
+.staff-notification-item-copy span {
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.staff-notification-item-time {
+  color: var(--text-faint);
+  -webkit-line-clamp: 1;
+}
+
+.staff-notification-empty {
+  margin: 0;
+  padding: 22px 16px;
+  text-align: center;
+}
+
+.staff-nav-toggle {
+  display: none;
+
+  width: 38px;
+  height: 38px;
+  place-items: center;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text);
+
+  transition: background-color var(--dur) var(--ease);
+}
+
+.staff-nav-toggle:hover {
+  background: var(--surface-sunken);
+}
+
+/* ---------- User chip ---------- */
+
+.staff-user-info {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.staff-avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+  background: var(--grad-brand);
+  color: var(--text-invert);
+
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+
+  box-shadow: var(--sh-brand);
+}
+
+.staff-user-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.staff-user-copy strong {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.staff-user-copy span {
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* ---------- Logout ---------- */
+
+.staff-logout-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  padding: 9px 15px;
+
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-pill);
+
+  font-size: var(--fs-sm);
+  font-weight: 600;
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.staff-logout-btn:hover {
+  background: var(--danger-bg);
+  border-color: var(--danger-bd);
+  color: var(--danger);
+}
+
+/* ---------- Content ---------- */
+
+.staff-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1560px;
+  margin-inline: auto;
+  padding: var(--sp-6) var(--gutter) var(--sp-9);
+  animation: wms-fade-up var(--dur) var(--ease-out) both;
+}
+
+.staff-loading {
+  padding: var(--sp-9);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--fs-md);
+}
+
+/* =========================================================
+   RESPONSIVE — sidebar becomes a drawer
+========================================================= */
+
+.staff-nav-backdrop {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .staff-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    transform: translateX(-100%);
+    transition: transform var(--dur) var(--ease-out);
+    box-shadow: var(--sh-xl);
+  }
+
+  .staff-sidebar.is-open {
+    transform: none;
+  }
+
+  .staff-nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(23, 26, 34, 0.5);
+    backdrop-filter: blur(2px);
+    animation: wms-fade-in var(--dur) var(--ease) both;
+  }
+
+  .staff-nav-toggle {
+    display: grid;
+  }
+
+  .staff-topbar {
+    padding-inline: var(--gutter);
+  }
+
+  .staff-content {
+    padding: var(--sp-5) var(--gutter) var(--sp-8);
+  }
+}
+
+@media (max-width: 560px) {
+  .staff-user-copy {
+    display: none;
+  }
+
+  .staff-logout-btn span {
+    display: none;
+  }
+
+  .staff-logout-btn {
+    padding: 9px 11px;
+  }
+}

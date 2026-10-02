@@ -1,0 +1,173 @@
+/* =========================================================
+   STAFF LOGIN
+========================================================= */
+
+.staff-login-page {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-6);
+
+  background: var(--grad-deep);
+}
+
+/* Brand bloom behind the card */
+.staff-login-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      620px 420px at 50% 12%,
+      rgba(235, 17, 101, 0.36),
+      transparent 62%
+    ),
+    radial-gradient(
+      520px 360px at 84% 92%,
+      rgba(174, 39, 95, 0.3),
+      transparent 60%
+    );
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.staff-login-card {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 390px;
+  padding: var(--sp-7);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-xl);
+
+  text-align: center;
+
+  animation: wms-scale-in var(--dur-slow) var(--ease-out) both;
+}
+
+.staff-login-mark {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto var(--sp-4);
+
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--r-lg);
+  background: var(--grad-brand);
+  color: var(--text-invert);
+
+  box-shadow: var(--sh-brand);
+}
+
+.staff-login-card h1 {
+  margin: 0 0 var(--sp-1);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--text-strong);
+  letter-spacing: -0.026em;
+}
+
+/* Subtitle only — :not() keeps the footer note out of this rule. */
+.staff-login-card > p:not(.staff-login-foot) {
+  margin: 0 0 var(--sp-6);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* =========================================================
+   FIELDS
+========================================================= */
+
+.staff-login-field {
+  margin-bottom: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  text-align: left;
+}
+
+.staff-login-field label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.staff-login-field input {
+  padding: 11px 13px;
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-md);
+  color: var(--text-strong);
+
+  outline: none;
+
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.staff-login-field input:hover {
+  border-color: var(--n-400);
+}
+
+.staff-login-field input:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.staff-login-field input::placeholder {
+  color: var(--text-faint);
+}
+
+/* =========================================================
+   SUBMIT & FOOTER
+========================================================= */
+
+.staff-login-submit {
+  width: 100%;
+  padding: 12px;
+  margin-top: var(--sp-2);
+  font-size: var(--fs-md);
+}
+
+.staff-login-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  margin: var(--sp-5) 0 0;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border-soft);
+
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 440px) {
+  .staff-login-card {
+    padding: var(--sp-6) var(--sp-5);
+  }
+}

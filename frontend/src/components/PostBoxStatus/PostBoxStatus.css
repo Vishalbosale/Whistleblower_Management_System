@@ -1,0 +1,488 @@
+/* =========================================================
+   POST BOX STATUS
+========================================================= */
+
+.postbox-status-page {
+  flex: 1;
+  min-height: calc(100svh - var(--header-h));
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: var(--sp-8) var(--gutter) var(--sp-10);
+  background: var(--canvas);
+}
+
+.postbox-status-card {
+  width: 100%;
+  max-width: 620px;
+  padding: var(--sp-6);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-md);
+
+  animation: wms-fade-up var(--dur-slow) var(--ease-out) both;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.postbox-status-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+
+  padding-bottom: var(--sp-5);
+  margin-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.postbox-status-title {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+
+.postbox-status-mark {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--r-md);
+  background: var(--grad-brand);
+  color: var(--text-invert);
+  box-shadow: var(--sh-brand);
+}
+
+.postbox-status-header h1 {
+  margin: 0;
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--text-strong);
+  letter-spacing: -0.02em;
+}
+
+.postbox-status-id {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.postbox-status-id code {
+  padding: 1px 7px;
+  border-radius: var(--r-xs);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.postbox-status-logout {
+  flex-shrink: 0;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  padding: 9px 15px;
+
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-pill);
+
+  font-size: var(--fs-sm);
+  font-weight: 600;
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.postbox-status-logout:hover {
+  background: var(--danger-bg);
+  border-color: var(--danger-bd);
+  color: var(--danger);
+}
+
+/* =========================================================
+   CURRENT STATUS
+========================================================= */
+
+.postbox-status-current {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+
+  padding: var(--sp-4) var(--sp-5);
+  margin-bottom: var(--sp-6);
+
+  background: var(--grad-brand-soft);
+  border: 1px solid var(--brand-100);
+  border-radius: var(--r-lg);
+}
+
+.postbox-status-pulse {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background: var(--brand-600);
+  animation: wms-pulse-ring 2.4s var(--ease) infinite;
+}
+
+.postbox-status-label {
+  display: block;
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--brand-600);
+}
+
+.postbox-status-value {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--brand-800);
+}
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.postbox-status-history h2,
+.postbox-status-clarification h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  margin: 0 0 var(--sp-4);
+
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.postbox-status-history {
+  margin-bottom: var(--sp-6);
+}
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.postbox-status-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--fs-md);
+}
+
+.postbox-status-timeline li {
+  position: relative;
+  margin-left: 5px;
+  padding: 0 0 var(--sp-4) var(--sp-5);
+  border-left: 2px solid var(--brand-100);
+}
+
+.postbox-status-timeline li:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.postbox-status-timeline li::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 5px;
+
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  background: var(--surface);
+  border: 2px solid var(--brand-500);
+}
+
+/* Newest entry gets the live dot. The list renders oldest-first (the API's
+   history is chronological ASC), so "newest" is the last item, not the
+   first. */
+.postbox-status-timeline li:last-child::before {
+  background: var(--brand-600);
+  box-shadow: 0 0 0 3px var(--brand-100);
+}
+
+.postbox-status-timeline-action {
+  display: block;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.postbox-status-timeline-remarks {
+  display: block;
+  margin-top: 3px;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.postbox-status-timeline-date {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.postbox-status-document {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 10px 12px;
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--text);
+  text-align: left;
+}
+
+.postbox-status-document:hover:not(:disabled) {
+  background: var(--surface-sunken);
+  border-color: var(--brand-300);
+}
+
+.postbox-status-document span:nth-child(2) {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.postbox-status-document-action {
+  color: var(--brand-600);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+/* =========================================================
+   CLARIFICATION
+========================================================= */
+
+.postbox-status-clarification {
+  padding: var(--sp-5);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+}
+
+.clarification-question {
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-5);
+
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-bd);
+  border-left: 3px solid var(--warning);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: var(--warning);
+  font-weight: 500;
+}
+
+.postbox-status-clarification label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--text-strong);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.postbox-status-clarification textarea {
+  width: 100%;
+  padding: 11px 13px;
+  margin-bottom: var(--sp-5);
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-family: inherit;
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: var(--text-strong);
+
+  outline: none;
+  resize: vertical;
+
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.postbox-status-clarification textarea:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.postbox-status-clarification input[type="file"] {
+  width: 100%;
+  margin-bottom: var(--sp-5);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.postbox-status-clarification input[type="file"]::file-selector-button {
+  margin-right: var(--sp-3);
+  padding: 8px 14px;
+
+  background: var(--surface);
+  color: var(--brand-700);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.postbox-status-clarification input[type="file"]::file-selector-button:hover {
+  background: var(--brand-50);
+  border-color: var(--brand-200);
+}
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.postbox-status-success {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+
+  padding: 11px 13px;
+  margin-bottom: var(--sp-4);
+
+  background: var(--success-bg);
+  border: 1px solid var(--success-bd);
+  border-left: 3px solid var(--success);
+  border-radius: var(--r-sm);
+
+  color: var(--success);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+
+  animation: wms-fade-up var(--dur) var(--ease-out) both;
+}
+
+.postbox-status-success svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.postbox-status-none {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  padding: var(--sp-5);
+
+  background: var(--surface-alt);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--r-lg);
+
+  font-size: var(--fs-md);
+  color: var(--text-muted);
+}
+
+.postbox-status-none svg {
+  flex-shrink: 0;
+  color: var(--success);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+  .postbox-status-page {
+    padding: var(--sp-5) var(--gutter) var(--sp-8);
+  }
+
+  .postbox-status-card {
+    padding: var(--sp-5) var(--sp-4);
+  }
+
+  .postbox-status-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-3);
+  }
+
+  .postbox-status-logout {
+    align-self: stretch;
+    justify-content: center;
+  }
+
+  .postbox-status-clarification {
+    padding: var(--sp-4);
+  }
+}
+
+/* The 6-day response deadline. Silence closes the complaint, so the date and
+   the consequence are stated on the face of the post box, not in small print. */
+.clarification-deadline {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+
+  padding: var(--sp-3) var(--sp-4);
+  margin: calc(var(--sp-5) * -1 + var(--sp-2)) 0 var(--sp-5);
+
+  background: var(--surface-sunken);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.clarification-deadline svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Two days or less to run. */
+.clarification-deadline.is-urgent {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-bd);
+  color: var(--danger);
+  font-weight: 500;
+}

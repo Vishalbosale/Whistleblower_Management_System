@@ -1,0 +1,765 @@
+/* =========================================================
+   POST BOX LOGIN — split layout
+   Light reassurance panel on the left, form card on the
+   right, both sitting on the same hero wash as the home
+   page so the two pages read as one site.
+========================================================= */
+
+.postbox-page {
+  flex: 1;
+  min-height: calc(100svh - var(--header-h));
+
+  display: flex;
+  align-items: center;
+
+  /* Same wash as .home-hero — the gradient runs across the whole page so
+     the two halves are one surface, not two blocks that happen to touch. */
+  background: linear-gradient(180deg, var(--brand-50) 0%, #ffffff 78%);
+  color: var(--text);
+}
+
+/* Mirrors .home-hero-inner: the two columns live on the same --shell-max
+   rail as every other page, so on wide viewports the panel and the card
+   sit close together in the middle of the screen instead of each pinned
+   to its own half. */
+.postbox-inner {
+  width: 100%;
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: var(--sp-9);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: var(--sp-9);
+}
+
+/* =========================================================
+   LEFT — REASSURANCE PANEL
+========================================================= */
+
+/* A bordered panel matching .postbox-card so the two sides read as a
+   matched pair — same height (the stretched grid row), same radius. */
+.postbox-aside {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+
+  padding: var(--sp-8) var(--sp-7);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-lg);
+  color: var(--text);
+}
+
+/* Soft burgundy blooms, kept faint so the panel stays light — the same
+   treatment the home hero uses. */
+.postbox-aside::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      620px 360px at 10% 4%,
+      rgba(151, 20, 77, 0.1),
+      transparent 64%
+    ),
+    radial-gradient(
+      480px 320px at 94% 98%,
+      rgba(235, 17, 101, 0.07),
+      transparent 62%
+    );
+}
+
+.postbox-aside-inner {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 480px;
+  margin-inline: 0;
+  text-align: left;
+
+  animation: wms-fade-up var(--dur-slow) var(--ease-out) both;
+}
+
+.postbox-aside-mark {
+  width: 54px;
+  height: 54px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--r-lg);
+  background: var(--grad-brand-soft);
+  border: 1px solid var(--brand-100);
+  color: var(--brand-700);
+
+  box-shadow: var(--sh-xs);
+}
+
+.postbox-aside h2 {
+  margin: var(--sp-5) 0 var(--sp-3);
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: var(--text-strong);
+  letter-spacing: -0.028em;
+}
+
+.postbox-aside > .postbox-aside-inner > p {
+  font-size: var(--fs-md);
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* ---------- Feature list ---------- */
+
+.postbox-aside-list {
+  list-style: none;
+  margin: var(--sp-7) 0 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.postbox-aside-list li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  align-items: center;
+  gap: var(--sp-3);
+
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--text);
+}
+
+.postbox-aside-list svg {
+  width: 34px;
+  height: 34px;
+  padding: 8px;
+
+  border-radius: var(--r-sm);
+  background: var(--brand-50);
+  border: 1px solid var(--brand-100);
+  color: var(--brand-600);
+}
+
+.postbox-aside-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border);
+
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.postbox-aside-note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* =========================================================
+   RIGHT — FORM SIDE
+========================================================= */
+
+.postbox-main {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+
+  /* Transparent, like the aside — the page wash carries both halves. */
+  background: transparent;
+}
+
+.postbox-card {
+  width: 100%;
+  max-width: 440px;
+
+  /* Stretches to the aside's height (the shared grid row); the content
+     group centers within whatever extra room that leaves. */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-lg);
+
+  overflow: hidden;
+
+  animation: wms-scale-in var(--dur-slow) var(--ease-out) 80ms both;
+}
+
+/* =========================================================
+   NOTICE — e.g. redirected here after an idle-timeout logout
+========================================================= */
+
+.postbox-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+
+  margin: var(--sp-6) var(--sp-6) 0;
+  padding: 11px 13px;
+
+  background: var(--info-bg);
+  border: 1px solid var(--info-bd);
+  border-left: 3px solid var(--info);
+  border-radius: var(--r-sm);
+
+  color: var(--info);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  text-align: left;
+
+  animation: wms-fade-up var(--dur) var(--ease-out) both;
+}
+
+.postbox-notice svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.postbox-notice span {
+  flex: 1;
+}
+
+.postbox-notice-dismiss {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+
+  width: 20px;
+  height: 20px;
+  margin: -2px -4px 0 0;
+
+  background: transparent;
+  border: none;
+  border-radius: var(--r-sm);
+  color: inherit;
+  opacity: 0.7;
+
+  transition: opacity var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+
+.postbox-notice-dismiss:hover {
+  opacity: 1;
+  background: rgba(35, 96, 204, 0.12);
+}
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.postbox-card-header {
+  padding: var(--sp-6) var(--sp-6) var(--sp-5);
+  text-align: center;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.postbox-card-icon {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto var(--sp-3);
+  display: grid;
+  place-items: center;
+
+  border-radius: var(--r-md);
+  background: var(--grad-brand-soft);
+  border: 1px solid var(--brand-100);
+  color: var(--brand-700);
+}
+
+.postbox-card-header h1 {
+  margin: 0;
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--text-strong);
+  letter-spacing: -0.02em;
+}
+
+.postbox-card-header p {
+  margin-top: var(--sp-1);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   ROLE TOGGLE — sliding thumb
+========================================================= */
+
+.postbox-role-toggle {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  margin: var(--sp-5) var(--sp-6) 0;
+  padding: 4px;
+
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+
+.postbox-role-thumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+
+  border-radius: var(--r-sm);
+  background: var(--grad-brand);
+  box-shadow: var(--sh-sm);
+
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.postbox-role-toggle[data-active="staff"] .postbox-role-thumb {
+  transform: translateX(100%);
+}
+
+.postbox-role-toggle button {
+  position: relative;
+  z-index: 1;
+
+  height: 38px;
+  padding: 0 var(--sp-2);
+
+  background: transparent;
+  border: none;
+  border-radius: var(--r-sm);
+
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+
+  transition: color var(--dur) var(--ease);
+}
+
+.postbox-role-toggle button:hover {
+  color: var(--text-strong);
+}
+
+.postbox-role-toggle button.active {
+  color: var(--text-invert);
+}
+
+.postbox-role-toggle button.active:hover {
+  color: var(--text-invert);
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.postbox-form {
+  padding: var(--sp-6);
+  animation: wms-fade-in var(--dur) var(--ease) both;
+}
+
+.postbox-field {
+  margin-bottom: var(--sp-4);
+  text-align: left;
+}
+
+.postbox-field label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--text-strong);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.postbox-field > input {
+  width: 100%;
+  height: 44px;
+  padding: 10px 13px;
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  color: var(--text-strong);
+  font-size: var(--fs-md);
+  font-family: inherit;
+
+  outline: none;
+
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.postbox-field > input:hover {
+  border-color: var(--n-400);
+}
+
+.postbox-field > input:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.postbox-field > input::placeholder {
+  color: var(--text-faint);
+}
+
+/* =========================================================
+   CAPTCHA
+========================================================= */
+
+.captcha-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-2);
+}
+
+.captcha-box {
+  flex: 1;
+  height: 54px;
+
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+
+  background:
+    repeating-linear-gradient(
+      25deg,
+      var(--n-100),
+      var(--n-100) 2px,
+      var(--n-0) 2px,
+      var(--n-0) 6px
+    );
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+
+  user-select: none;
+}
+
+.captcha-text {
+  color: var(--brand-800);
+  font-family: var(--font-mono);
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  transform: rotate(-2deg) skewX(-7deg);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.refresh-captcha {
+  flex-shrink: 0;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 8px 12px;
+
+  background: transparent;
+  color: var(--brand-700);
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  white-space: nowrap;
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.refresh-captcha:hover {
+  background: var(--brand-50);
+  border-color: var(--brand-100);
+}
+
+.refresh-captcha:hover svg {
+  animation: wms-spin 0.6s var(--ease);
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.login-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+
+  margin-bottom: var(--sp-4);
+  padding: 11px 13px;
+
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-bd);
+  border-left: 3px solid var(--danger);
+  border-radius: var(--r-sm);
+
+  color: var(--danger);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  text-align: left;
+
+  animation: wms-fade-up var(--dur) var(--ease-out) both;
+}
+
+.login-error svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.postbox-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+
+.login-button {
+  position: relative;
+  overflow: hidden;
+
+  flex: 1;
+  height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+
+  background: var(--grad-brand);
+  color: var(--text-invert);
+  border: none;
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-md);
+  font-weight: 700;
+
+  box-shadow: var(--sh-brand);
+
+  transition:
+    transform var(--dur) var(--ease-spring),
+    box-shadow var(--dur) var(--ease),
+    filter var(--dur) var(--ease);
+}
+
+.login-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--grad-sheen);
+  transform: translateX(-120%);
+  transition: transform 700ms var(--ease-out);
+}
+
+.login-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow: 0 14px 26px -10px rgba(151, 20, 77, 0.6);
+}
+
+.login-button:hover:not(:disabled)::before {
+  transform: translateX(120%);
+}
+
+.login-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-button:disabled {
+  opacity: 0.68;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.reset-button {
+  height: 46px;
+  padding: 0 var(--sp-5);
+
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-md);
+  font-weight: 600;
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.reset-button:hover {
+  background: var(--surface-sunken);
+  border-color: var(--n-400);
+  color: var(--text-strong);
+}
+
+/* =========================================================
+   ENTERPRISE SSO — divider + button (Staff / Case Owner only)
+========================================================= */
+
+.postbox-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+
+  color: var(--text-faint);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.postbox-divider::before,
+.postbox-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.sso-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+
+  height: 46px;
+  margin-top: var(--sp-5);
+
+  background: var(--surface);
+  color: var(--text-strong);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-md);
+  font-weight: 600;
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.sso-button:hover {
+  background: var(--surface-sunken);
+  border-color: var(--brand-300);
+  color: var(--brand-700);
+}
+
+/* =========================================================
+   TABLET — stack, keep a condensed brand strip
+========================================================= */
+
+@media (max-width: 940px) {
+  .postbox-inner {
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+    padding-block: var(--sp-7) var(--sp-9);
+  }
+
+  .postbox-aside {
+    justify-content: center;
+    padding: var(--sp-7) var(--sp-6);
+  }
+
+  .postbox-aside-inner {
+    max-width: 480px;
+    margin-inline: 0;
+  }
+
+  .postbox-aside > .postbox-aside-inner > p {
+    max-width: 68ch;
+  }
+
+  .postbox-aside-list li {
+    max-width: 68ch;
+  }
+
+  .postbox-aside h2 {
+    font-size: var(--fs-2xl);
+  }
+
+  .postbox-aside-list {
+    margin-top: var(--sp-5);
+    gap: var(--sp-3);
+  }
+
+  .postbox-aside-note {
+    display: none;
+  }
+
+  .postbox-main {
+    justify-content: center;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+  .postbox-inner {
+    padding-block: var(--sp-6) var(--sp-8);
+  }
+
+  .postbox-aside {
+    padding: var(--sp-6) var(--sp-5);
+  }
+
+  .postbox-aside h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .postbox-aside-list li {
+    font-size: var(--fs-sm);
+  }
+
+  .postbox-card-header,
+  .postbox-form {
+    padding-inline: var(--sp-5);
+  }
+
+  .postbox-role-toggle {
+    margin-inline: var(--sp-5);
+  }
+
+  .captcha-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .refresh-captcha {
+    align-self: flex-end;
+  }
+
+  .postbox-actions {
+    flex-direction: column-reverse;
+  }
+
+  .reset-button {
+    width: 100%;
+  }
+}

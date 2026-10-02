@@ -1,0 +1,1285 @@
+/* =========================================================
+   CASE WORKBENCH
+   The one screen that has to answer three questions at a
+   glance — where the work sits in the pipeline, what is
+   about to breach, and who is carrying it — before the
+   table below answers "which one".
+
+   Chart colour is not decorative here. Every palette below
+   was run through the data-viz six checks against the white
+   card surface (#ffffff); the note on each block records
+   what passed and what mitigation the WARNs oblige.
+========================================================= */
+
+/* ---------------------------------------------------------
+   HERO
+   Light, not another slab of burgundy — the sidebar is
+   already --grad-deep, and two deep panels side by side
+   flatten the page. A brand wash plus one accent rail.
+--------------------------------------------------------- */
+
+.wb-hero {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-5);
+
+  padding: var(--sp-6) var(--sp-7);
+  margin-bottom: var(--sp-5);
+
+  background: linear-gradient(118deg, var(--n-0) 0%, var(--brand-50) 62%, var(--accent-100) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-xs);
+}
+
+/* Brand rail down the leading edge — the page-header tick, grown up. */
+.wb-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: var(--grad-brand);
+}
+
+/* Soft glow, so the flat wash has somewhere to fall away to. */
+.wb-hero::after {
+  content: "";
+  position: absolute;
+  top: -55%;
+  right: -6%;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(235, 17, 101, 0.14), transparent);
+  pointer-events: none;
+}
+
+.wb-hero-copy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.wb-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: var(--sp-2);
+
+  color: var(--brand-600);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.wb-hero h1 {
+  font-size: var(--fs-3xl);
+  letter-spacing: -0.03em;
+  color: var(--brand-900);
+}
+
+.wb-hero-sub {
+  max-width: 56ch;
+  margin-top: var(--sp-2);
+
+  color: var(--text-muted);
+  font-size: var(--fs-md);
+  line-height: 1.55;
+}
+
+.wb-hero-side {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.wb-hero-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+
+  padding: var(--sp-3) var(--sp-5);
+
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--brand-100);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-xs);
+  backdrop-filter: blur(6px);
+}
+
+.wb-hero-metric b {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--brand-700);
+  font-variant-numeric: tabular-nums;
+}
+
+.wb-hero-metric span {
+  color: var(--text-faint);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wb-insights-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  padding: 10px 16px;
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-pill);
+
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.wb-insights-btn:hover {
+  background: var(--brand-50);
+  border-color: var(--brand-300);
+  color: var(--brand-700);
+}
+
+/* Points down while the panels are open, right while they are folded away. */
+.wb-insights-btn svg {
+  transform: rotate(90deg);
+  transition: transform var(--dur) var(--ease);
+}
+
+.wb-insights-btn[aria-expanded="false"] svg {
+  transform: rotate(0deg);
+}
+
+/* ---------------------------------------------------------
+   KPI TILES
+   Stat tiles, not charts — a single number's job is to be
+   read, so it gets no plot. The meter under the derived
+   ones is the only mark, and it is a share-of-total.
+--------------------------------------------------------- */
+
+.wb-kpis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+
+/* Compact, clickable status tiles — a single responsive row that wraps
+   rather than a grid that stretches every tile to fill a column. Most are a
+   real <button>; a couple (anchor-style, jumping to a section) are an <a> —
+   the reset below undoes both the browser's button chrome and link styling. */
+.wb-kpi {
+  position: relative;
+  flex: 0 1 auto;
+  min-width: 126px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-start;
+
+  padding: 9px var(--sp-4);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border-strong);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-xs);
+
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+
+  transition:
+    transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.wb-kpi:hover {
+  transform: translateY(-1px);
+  border-color: var(--brand-200);
+  border-left-color: var(--brand-500);
+  box-shadow: var(--sh-sm);
+}
+
+.wb-kpi:active {
+  transform: translateY(0);
+}
+
+.wb-kpi.is-active {
+  border-color: var(--brand-400);
+  border-left-color: var(--brand-600);
+  box-shadow: 0 0 0 2px var(--brand-100);
+}
+
+.wb-kpi-value {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.wb-kpi-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  color: var(--text-faint);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.wb-kpi-label svg {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+/* --- Tones. The status hues are reserved: they mean state here (overdue /
+       closing in / navigational), never "series 3" — carried by the left
+       accent bar and the icon, consistently, tile to tile. --- */
+
+.wb-kpi--brand {
+  border-left-color: var(--brand-700);
+}
+
+.wb-kpi--brand.is-active {
+  background: var(--brand-50);
+}
+
+.wb-kpi--muted { border-left-color: var(--n-400); }
+.wb-kpi--danger { border-left-color: var(--danger); }
+.wb-kpi--warning { border-left-color: var(--warning); }
+.wb-kpi--info { border-left-color: var(--info); }
+
+.wb-kpi--muted .wb-kpi-label { color: var(--brand-600); }
+.wb-kpi--danger .wb-kpi-label { color: var(--danger); }
+.wb-kpi--warning .wb-kpi-label { color: var(--warning); }
+.wb-kpi--info .wb-kpi-label { color: var(--info); }
+
+.wb-kpi--danger.is-active { background: var(--danger-bg); }
+.wb-kpi--warning.is-active { background: var(--warning-bg); }
+.wb-kpi--info.is-active { background: var(--info-bg); }
+
+/* A tile counting something wrong says so in its number too, not only in
+   its accent bar. */
+.wb-kpi--danger.is-hot .wb-kpi-value { color: var(--danger); }
+.wb-kpi--warning.is-hot .wb-kpi-value { color: var(--warning); }
+
+/* ---------------------------------------------------------
+   INSIGHT PANELS
+--------------------------------------------------------- */
+
+.wb-insights {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-5);
+}
+
+.wb-insights-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.wb-panel-wide {
+  width: 100%;
+}
+
+.wb-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+
+  padding: var(--sp-5);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-xs);
+
+  transition:
+    box-shadow var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.wb-panel:hover {
+  border-color: var(--brand-100);
+  box-shadow: var(--sh-sm);
+}
+
+.wb-panel-head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+}
+
+.wb-panel-head > svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--brand-500);
+}
+
+.wb-panel-title {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--text-strong);
+  letter-spacing: -0.01em;
+}
+
+.wb-panel-note {
+  margin-top: 2px;
+  color: var(--text-faint);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+}
+
+.wb-panel-empty {
+  padding: var(--sp-7) 0;
+  text-align: center;
+  color: var(--text-faint);
+  font-size: var(--fs-sm);
+}
+
+/* ---------------------------------------------------------
+   DONUT — stage mix
+   Palette (validated all-pairs, light, surface #ffffff):
+     #97144d intake · #2a78d6 investigation ·
+     #eda100 committee · #1baf7a closed · #6f7787 other
+   Worst all-pairs CVD dE 9.1, normal-vision dE 22.9 — pass.
+   Amber and aqua sit under 3:1 on white, so the relief rule
+   applies: every slice is named and counted in the legend
+   and the centre reads out on hover, so colour is never
+   the only channel.
+--------------------------------------------------------- */
+
+.wb-donut-body {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+.wb-donut-wrap {
+  position: relative;
+  width: 178px;
+  height: 178px;
+  flex-shrink: 0;
+}
+
+.wb-donut {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wb-donut circle {
+  cursor: pointer;
+  transition:
+    stroke-dasharray var(--dur-slow) var(--ease-out),
+    stroke-dashoffset var(--dur-slow) var(--ease-out),
+    opacity var(--dur) var(--ease),
+    stroke-width var(--dur) var(--ease);
+}
+
+/* Dim the rest rather than pop the hovered arc — a donut that
+   explodes a slice loses the shared radius its angles are
+   read against. */
+.wb-donut.is-probing circle { opacity: 0.26; }
+
+.wb-donut.is-probing circle.is-active {
+  opacity: 1;
+  stroke-width: 26;
+}
+
+.wb-donut-center {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+
+  text-align: center;
+  pointer-events: none;
+}
+
+.wb-donut-total {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.wb-donut-caption {
+  max-width: 100px;
+  color: var(--text-muted);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* --- Legend. Always present for >= 2 series, and it carries
+       the exact counts, so the chart has its table view
+       built in. --- */
+
+.wb-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 190px;
+  min-width: 0;
+}
+
+.wb-legend-item {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--sp-2);
+
+  width: 100%;
+  padding: 6px var(--sp-2);
+
+  background: none;
+  border: none;
+  border-radius: var(--r-xs);
+
+  text-align: left;
+  font-size: var(--fs-xs);
+
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.wb-legend-item:hover,
+.wb-legend-item.is-active {
+  background: var(--surface-alt);
+}
+
+.wb-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.wb-legend-name {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wb-legend-count {
+  color: var(--text-strong);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.wb-legend-pct {
+  min-width: 40px;
+  color: var(--text-faint);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------
+   COLUMNS — the due-date clock
+   Two groups, each internally ordered, both direct-labelled:
+   the alerts (#c0362c overdue, #d38116 today) in reserved
+   status hues, then the calm end stepping down the brand
+   ramp (#97144d, #e05e97) to a deliberate neutral for
+   "plenty of time". Adjacent pairs validated: worst CVD
+   dE 13.8, normal-vision dE 17.1 — pass. The neutral is the
+   one intentional sub-chroma step; it always carries its
+   own label and count.
+--------------------------------------------------------- */
+
+.wb-cols {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-2);
+}
+
+.wb-col {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.wb-col-value {
+  color: var(--text-strong);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--dur) var(--ease);
+}
+
+.wb-col-track {
+  position: relative;
+  width: 100%;
+  height: 124px;
+  display: flex;
+  align-items: flex-end;
+
+  /* The baseline the columns are anchored to. */
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.wb-col-fill {
+  width: 100%;
+  min-height: 3px;
+  border-radius: 4px 4px 0 0;
+  transition:
+    height var(--dur-slow) var(--ease-out),
+    filter var(--dur) var(--ease);
+}
+
+.wb-col:hover .wb-col-fill {
+  filter: saturate(1.12) brightness(1.06);
+}
+
+.wb-col:hover .wb-col-value {
+  color: var(--brand-700);
+}
+
+.wb-col-label {
+  color: var(--text-muted);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.wb-col.is-zero .wb-col-value,
+.wb-col.is-zero .wb-col-label {
+  color: var(--text-faint);
+}
+
+.wb-col.is-zero .wb-col-fill {
+  background: var(--border) !important;
+}
+
+.wb-cols-foot {
+  color: var(--text-faint);
+  font-size: var(--fs-xs);
+}
+
+/* ---------------------------------------------------------
+   WORKLOAD BARS — one series, so one hue and no legend;
+   the panel title names it.
+--------------------------------------------------------- */
+
+.wb-load {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.wb-load-row {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) 28px;
+  align-items: center;
+  gap: var(--sp-3);
+
+  padding: 3px var(--sp-2);
+  border-radius: var(--r-xs);
+
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.wb-load-row:hover {
+  background: var(--surface-alt);
+}
+
+.wb-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 26px;
+  height: 26px;
+
+  background: var(--brand-50);
+  border: 1px solid var(--brand-100);
+  border-radius: 50%;
+
+  color: var(--brand-700);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.wb-avatar.is-vacant {
+  background: var(--surface-sunken);
+  border-style: dashed;
+  border-color: var(--border-strong);
+  color: var(--text-faint);
+}
+
+.wb-load-main {
+  min-width: 0;
+}
+
+.wb-load-name {
+  display: block;
+  color: var(--text);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wb-load-track {
+  height: 8px;
+  margin-top: 4px;
+  background: var(--surface-sunken);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+
+.wb-load-fill {
+  height: 100%;
+  border-radius: var(--r-pill);
+  background: var(--brand-700);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+
+.wb-load-row.is-vacant .wb-load-fill {
+  background: var(--n-400);
+}
+
+.wb-load-count {
+  color: var(--text-strong);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------
+   STATUS OVERVIEW CHART — one series (ticket counts), so one
+   hue does the whole chart. Identity is carried by the row
+   label, not by color, so no legend is needed.
+--------------------------------------------------------- */
+
+.wb-status-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+/* Each row is a real <button> — clicking it sets the workbench's status
+   filter — so the reset below undoes default button chrome first. */
+.wb-status-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.32fr) 1fr auto;
+  align-items: center;
+  gap: var(--sp-3);
+
+  width: 100%;
+  padding: 6px var(--sp-2);
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  transition: background-color var(--dur) var(--ease);
+}
+
+.wb-status-row:hover {
+  background: var(--surface-sunken);
+}
+
+.wb-status-row.is-active {
+  background: var(--brand-50);
+}
+
+.wb-status-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+  color: var(--text-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wb-status-kind {
+  flex-shrink: 0;
+  padding: 1px 6px;
+  border-radius: var(--r-xs);
+  background: var(--brand-50);
+  color: var(--brand-700);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.wb-status-kind.is-precase {
+  background: var(--n-100);
+  color: var(--n-600);
+}
+
+.wb-status-row.is-active .wb-status-kind {
+  background: var(--brand-600);
+  color: var(--n-0);
+}
+
+.wb-status-track {
+  position: relative;
+  height: 8px;
+  border-radius: var(--r-pill, 999px);
+  background: var(--n-100);
+  overflow: hidden;
+}
+
+.wb-status-fill {
+  display: block;
+  height: 100%;
+  min-width: 4px;
+  border-radius: var(--r-pill, 999px);
+  background: var(--brand-600);
+  transition: width var(--dur) var(--ease);
+}
+
+.wb-status-row:hover .wb-status-fill,
+.wb-status-row.is-active .wb-status-fill {
+  background: var(--brand-700);
+}
+
+.wb-status-count {
+  min-width: 26px;
+  text-align: right;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-strong);
+}
+
+/* ---------------------------------------------------------
+   TOOLBAR — filters in one row above the table, labelled,
+   so a select's current value is never the only clue to
+   what it filters.
+--------------------------------------------------------- */
+
+.wb-toolbar {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+
+  padding: var(--sp-4);
+  margin-bottom: var(--sp-3);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-xs);
+}
+
+.wb-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.wb-field > span {
+  color: var(--text-faint);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wb-field select {
+  appearance: none;
+  min-width: 152px;
+  padding: 9px 32px 9px 12px;
+
+  background-color: var(--surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236f7787' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-strong);
+  cursor: pointer;
+  outline: none;
+
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.wb-field select:hover {
+  border-color: var(--n-400);
+}
+
+.wb-field select:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* The select that is actually filtering something reads as on. */
+.wb-field select.is-set {
+  border-color: var(--brand-400);
+  background-color: var(--brand-50);
+  color: var(--brand-800);
+  font-weight: 600;
+}
+
+.wb-field input[type="date"] {
+  min-width: 152px;
+  padding: 8px 12px;
+
+  background-color: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-strong);
+  cursor: pointer;
+  outline: none;
+
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.wb-field input[type="date"]:hover {
+  border-color: var(--n-400);
+}
+
+.wb-field input[type="date"]:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.wb-field input[type="date"].is-set {
+  border-color: var(--brand-400);
+  background-color: var(--brand-50);
+  color: var(--brand-800);
+  font-weight: 600;
+}
+
+.wb-field-search {
+  flex: 1 1 240px;
+}
+
+.wb-toolbar .staff-search {
+  min-width: 0;
+}
+
+.wb-toolbar-spacer {
+  flex: 1;
+}
+
+.wb-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 9px 16px;
+
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.wb-reset:hover:not(:disabled) {
+  background: var(--danger-bg);
+  border-color: var(--danger-bd);
+  color: var(--danger);
+}
+
+.wb-reset:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* --- Active-filter chips: each removable on its own, so
+       widening a search is not all-or-nothing. --- */
+
+.wb-chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-4);
+}
+
+.wb-chips-label {
+  color: var(--text-faint);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wb-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+
+  padding: 5px 6px 5px 12px;
+
+  background: var(--brand-50);
+  border: 1px solid var(--brand-200);
+  border-radius: var(--r-pill);
+
+  font-size: var(--fs-xs);
+  color: var(--brand-800);
+}
+
+.wb-chip b {
+  font-weight: 700;
+}
+
+.wb-chip button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+  padding: 0;
+
+  background: rgba(151, 20, 77, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: var(--brand-700);
+
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.wb-chip button:hover {
+  background: var(--brand-700);
+  color: var(--n-0);
+}
+
+/* ---------------------------------------------------------
+   TABLE
+--------------------------------------------------------- */
+
+.wb-table-card {
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-xs);
+}
+
+.wb-scroll {
+  max-height: 64vh;
+  overflow: auto;
+}
+
+.wb-table th {
+  /* Sits above the rows it scrolls over. */
+  z-index: 2;
+  box-shadow: inset 0 -1px 0 var(--border);
+}
+
+.wb-table td {
+  vertical-align: middle;
+}
+
+/* Record type — a case and a complaint that has not become
+   one yet behave differently, so they should not look
+   identical. */
+.wb-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 3px 9px;
+  border-radius: var(--r-xs);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.wb-type-case {
+  background: var(--brand-50);
+  border: 1px solid var(--brand-100);
+  color: var(--brand-700);
+}
+
+.wb-type-pre {
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.wb-ref {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.wb-ref b {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--brand-700);
+}
+
+.wb-ref b.is-pending {
+  color: var(--text-faint);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.wb-ref span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+}
+
+.wb-prio {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.wb-prio::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--n-400);
+}
+
+.wb-prio-high::before { background: var(--danger); }
+.wb-prio-medium::before { background: var(--warning); }
+.wb-prio-low::before { background: var(--success); }
+
+.wb-owner {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+}
+
+.wb-avatar-sm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+
+  background: var(--brand-50);
+  border: 1px solid var(--brand-100);
+  border-radius: 50%;
+
+  color: var(--brand-700);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.wb-avatar-sm.is-vacant {
+  background: var(--surface-sunken);
+  border-style: dashed;
+  border-color: var(--border-strong);
+  color: var(--text-faint);
+}
+
+.wb-due {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-variant-numeric: tabular-nums;
+}
+
+.wb-due-rel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.wb-due.is-overdue .wb-due-rel { color: var(--danger); }
+.wb-due.is-soon .wb-due-rel { color: var(--warning); }
+.wb-due.is-overdue > time { color: var(--danger); font-weight: 600; }
+
+.wb-go {
+  width: 28px;
+  color: var(--text-faint);
+  opacity: 0;
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.wb-table tbody tr:hover .wb-go {
+  opacity: 1;
+  transform: translateX(3px);
+  color: var(--brand-600);
+}
+
+.wb-table-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+
+  padding: var(--sp-3) var(--sp-5);
+
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+}
+
+.wb-table-foot b {
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.wb-truncated {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--warning);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------------- */
+
+@media (max-width: 1240px) {
+  .wb-insights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* The workload list is the one that reads fine full-width. */
+  .wb-insights > .wb-panel:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 860px) {
+  .wb-hero {
+    padding: var(--sp-5);
+    align-items: flex-start;
+  }
+
+  .wb-hero h1 {
+    font-size: var(--fs-2xl);
+  }
+
+  .wb-hero-side {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .wb-insights {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wb-insights > .wb-panel:last-child {
+    grid-column: auto;
+  }
+
+  .wb-field {
+    flex: 1 1 100%;
+  }
+
+  .wb-field select,
+  .wb-field input[type="date"] {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .wb-toolbar-spacer {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .wb-donut-body {
+    justify-content: center;
+  }
+
+  .wb-kpi {
+    flex: 1 1 calc(50% - var(--sp-3));
+  }
+}
